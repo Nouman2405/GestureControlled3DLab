@@ -36,30 +36,113 @@ document.body.appendChild(renderer.domElement);
 
 // ==================== LIGHTING ====================
 
-const ambientLight = new THREE.AmbientLight(0xffffff, 1.5);
+// Overall light
+const ambientLight = new THREE.AmbientLight(
+    0xffffff,
+    1.8
+);
+
 scene.add(ambientLight);
 
+
+// Sky / ground fill
 const hemisphereLight = new THREE.HemisphereLight(
-  0xffffff,
-  0x444444,
-  2
+    0xffffff,
+    0x555555,
+    1.8
 );
 
 scene.add(hemisphereLight);
 
-const frontLight = new THREE.DirectionalLight(0xffffff, 3);
-frontLight.position.set(5, 8, 10);
-frontLight.castShadow = true;
+
+// FRONT
+const frontLight = new THREE.DirectionalLight(
+    0xffffff,
+    2.5
+);
+
+frontLight.position.set(
+    5,
+    8,
+    10
+);
+
+frontLight.target.position.set(0, 0, 0);
+
 scene.add(frontLight);
+scene.add(frontLight.target);
 
-const backLight = new THREE.DirectionalLight(0xffffff, 2);
-backLight.position.set(-5, 5, -5);
+
+// BACK
+const backLight = new THREE.DirectionalLight(
+    0xffffff,
+    2.0
+);
+
+backLight.position.set(
+    -5,
+    6,
+    -10
+);
+
+backLight.target.position.set(0, 0, 0);
+
 scene.add(backLight);
+scene.add(backLight.target);
 
-const topLight = new THREE.PointLight(0xffffff, 2);
-topLight.position.set(0, 8, 3);
+
+// LEFT
+const leftLight = new THREE.DirectionalLight(
+    0xffffff,
+    2.0
+);
+
+leftLight.position.set(
+    -10,
+    6,
+    2
+);
+
+leftLight.target.position.set(0, 0, 0);
+
+scene.add(leftLight);
+scene.add(leftLight.target);
+
+
+// RIGHT
+const rightLight = new THREE.DirectionalLight(
+    0xffffff,
+    2.0
+);
+
+rightLight.position.set(
+    10,
+    6,
+    2
+);
+
+rightLight.target.position.set(0, 0, 0);
+
+scene.add(rightLight);
+scene.add(rightLight.target);
+
+
+// TOP
+const topLight = new THREE.DirectionalLight(
+    0xffffff,
+    1.5
+);
+
+topLight.position.set(
+    0,
+    12,
+    0
+);
+
+topLight.target.position.set(0, 0, 0);
+
 scene.add(topLight);
-
+scene.add(topLight.target);
 // ==================== CAMERA CONTROLS ====================
 
 const controls = new OrbitControls(camera, renderer.domElement);
